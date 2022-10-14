@@ -1,9 +1,8 @@
-from numpy import inner
 import requests
 import pandas as pd
 
 offset_ = 1
-limit_ = 150
+limit_ = 12
 url = f'https://xn--80az8a.xn--d1aqf.xn--p1ai/%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D1%8B/api/kn/object?offset={offset_}&limit={limit_}&sortField=devId.devShortCleanNm&sortType=asc&objStatus=0'
 res = requests.get(url)
 objects_data = res.json()
@@ -11,7 +10,6 @@ objects_data.get('data').get('list')[0]
 
 objects_list = objects_data.get('data').get('list')
 objids = [x.get('objId') for x in objects_list]
-# print(len(objids), objids, sep='\n')
 
 url = []
 for i in range (len(objids)):
@@ -25,13 +23,9 @@ for i in url:
     ress.append(res)
 for i in range (len(ress)):
     resss.append(ress[i].json())
-print(resss)
-# print(*url, sep='\n')
-# print(ress)
-# print(len(url), url, sep='\n')
-# df_0 = pd.DataFrame(ress[0])
-# for i in range (1, len(ress)):
-#     df_1 = pd.DataFrame(ress[i])
-#     df_0 = pd.concat([df_0, df_1], ignore_index=True, sort=False)
-#     # df_0.to_csv("panda.csv", index=True, header=False)
-# print(df_0)
+a = pd.json_normalize(resss, max_level=3)
+print(a)
+
+for i in range (1, len(ress)):
+    df = pd.DataFrame(ress[i])
+    df.to_excel("panda.xlsx", index=True, header=True)

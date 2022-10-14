@@ -26,6 +26,5 @@ for i in range (len(ress)):
 a = pd.json_normalize(resss, max_level=3)
 print(a)
 
-for i in range (1, len(ress)):
-    df = pd.DataFrame(ress[i])
-    df.to_excel("panda.xlsx", index=True, header=True)
+df = pd.DataFrame(a)
+df.to_excel("panda.xlsx", index=True, header=True)

@@ -6,7 +6,7 @@ def obj_pars():
     offset_ = 1
     limit_ = 100
     resss = []
-    for i in range (10):
+    for i in range (30):
         url = f'https://xn--80az8a.xn--d1aqf.xn--p1ai/%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D1%8B/api/kn/object?offset={offset_ * i * limit_}&limit={limit_}&sortField=devId.devShortCleanNm&sortType=asc&objStatus=0'
         res = requests.get(url)
         objects_data = res.json()
